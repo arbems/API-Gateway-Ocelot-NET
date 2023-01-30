@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/auth/token?username={username}&userType={userType}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token?username={username}&userType={userType}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []

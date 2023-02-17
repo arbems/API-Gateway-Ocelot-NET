@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ServicioB.Dtos;
+using System.Net.Http;
 
 namespace ServicioB.Controllers
 {
@@ -18,30 +19,22 @@ namespace ServicioB.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> Get()
         {
-            List<UserDto> userList = new();
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync("https://jsonplaceholder.typicode.com/users"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    userList = JsonConvert.DeserializeObject<List<UserDto>>(apiResponse);
-                }
-            }
+            using var httpClient = new HttpClient();
+            using var response = await httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var userList = JsonConvert.DeserializeObject<List<UserDto>>(apiResponse);
+
             return Ok(userList);
         }
 
         [HttpGet("users/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            UserDto post = new();
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{id}"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    post = JsonConvert.DeserializeObject<UserDto>(apiResponse);
-                }
-            }
+            using var httpClient = new HttpClient();
+            using var response = await httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{id}");
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var post = JsonConvert.DeserializeObject<UserDto>(apiResponse);
+
             return Ok(post);
         }
 

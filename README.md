@@ -1,5 +1,5 @@
-# API Gateway Ocelot NET
-API Gateway en .NET con Ocelot, exponer servicios a través del API Gateway utilizando esta potente herramienta de código abierto.
+# API Gateway Ocelot .NET
+Example of API Gateway in .NET with Ocelot. This example contains 3 microservices and an API gateway. Configuration and some of the Ocelot features such as authentication, authorization, caching, rate limiting, delegating handlers, etc.
 
 ## Tecnologías
 
